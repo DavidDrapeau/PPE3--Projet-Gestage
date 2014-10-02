@@ -152,8 +152,9 @@ function valider()
     }
 
     if (ok == 1) {
-
+        alert("Personne créée !");
         document.submit();
+        return true;
 
     }
 

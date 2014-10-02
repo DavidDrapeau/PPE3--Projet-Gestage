@@ -65,7 +65,7 @@
             <input type="text" name="formation" id="formation"></input><br/>
             <label for="option">Specialité :</label>
             <select name ="option" id="option">
-                <option value= ""></option>
+                <option value=""></option>
                 <?
 //création du contenu du select pour les spécialités des étudiants
                 foreach ($this->lireDonnee('lesSpecialites') as $spe) {
@@ -73,15 +73,8 @@
                 }
                 ?>
             </select>
-
-        </fieldset>
-
+        </fieldset>  
     </div>
-
-
-
-
-
     <!-- Information nécessaire uniquement aux maitre de stage -->
 
     <div id="Formulaire_MaitreStage" style="visibility:hidden" height="0">
@@ -99,14 +92,8 @@
 //                }
                 ?>    
             </select> 
-
         </fieldset>
-
     </div>
-
-
-
-
 
     <!-- Donnée de conection des utilisateur -->
     <fieldset>
@@ -117,7 +104,6 @@
         <input type="password" name="mdp" id="mdp"></input><br/>
         <label for="mdp2">Retaper le mot de passe :</label>  <!-- vérification de mots de passe -->
         <input type="password" name="mdp2" id="mdp2"></input><br/>
-
     </fieldset>
     <fieldset>
         <input type="submit" value="Creer" onclick="return valider()"></input><!-- OnClick éxécutera le JS qui testera tout les champ du formulaire. -->
