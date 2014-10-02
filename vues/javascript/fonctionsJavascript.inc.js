@@ -79,18 +79,18 @@ function valider()
         return false;
     }
 
-    if (isNaN(document.getElementById('tel').value))
+    if (isNaN(document.getElementById('telP').value))
     {
         alert("Votre téléphone portable ne comporte pas uniquement des chiffres. \nVeuillez corriger.");
         ok = 0;
-        document.getElementById('tel').focus();
+        document.getElementById('telP').focus();
         return false;
     }
     if ((document.getElementById('telP').value.length > 10) || (document.getElementById('tel').value.length < 10))
     {
         alert("Votre téléphone portable ne comporte pas 10 chiffres.");
         ok = 0;
-        document.getElementById('tel').focus();
+        document.getElementById('telP').focus();
         return false;
     }
     if (document.getElementById('mail').value == "")

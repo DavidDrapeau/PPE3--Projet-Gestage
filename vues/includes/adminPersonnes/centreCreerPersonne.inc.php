@@ -104,21 +104,25 @@
 
     </div>
 
-<!-- Donnée de conection des utilisateur -->
-<fieldset>
-    <legend>Ses identifiants de connexion</legend>
-    <label for="login">Login :</label>
-    <input type="text" name="login" id="login"></input><br/>
-    <label for="mdp">Mot de passe :</label>
-    <input type="password" name="mdp" id="mdp"></input><br/>
-    <label for="mdp2">Retaper le mot de passe :</label>  <!-- vérification de mots de passe -->
-    <input type="password" name="mdp2" id="mdp2"></input><br/>
 
-</fieldset>
-<fieldset>
-    <input type="submit" value="Creer" onclick="return valider()"></input><!-- OnClick éxécutera le JS qui testera tout les champ du formulaire. -->
-    <input type="button" value="Retour" onclick="history.go(-1)">
-</fieldset>
+
+
+
+    <!-- Donnée de conection des utilisateur -->
+    <fieldset>
+        <legend>Ses identifiants de connexion</legend>
+        <label for="login">Login :</label>
+        <input type="text" name="login" id="login"></input><br/>
+        <label for="mdp">Mot de passe :</label>
+        <input type="password" name="mdp" id="mdp"></input><br/>
+        <label for="mdp2">Retaper le mot de passe :</label>  <!-- vérification de mots de passe -->
+        <input type="password" name="mdp2" id="mdp2"></input><br/>
+
+    </fieldset>
+    <fieldset>
+        <input type="submit" value="Creer" onclick="return valider()"></input><!-- OnClick éxécutera le JS qui testera tout les champ du formulaire. -->
+        <input type="button" value="Retour" onclick="history.go(-1)">
+    </fieldset>
 </form>
 <?php
 // message de validation de création ou non 
