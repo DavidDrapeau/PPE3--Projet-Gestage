@@ -37,14 +37,14 @@ class C_AdminPersonnes extends C_ControleurGenerique {
 
             $daoPers = new M_DaoPersonne();
             $daoPers->connecter();
-                
+ 
         $option=$_POST['option'];
         $role=$_POST['role'];
         $civilite=$_POST['civilite'];
         $nom=$_POST['nom'];
         $prenom=$_POST['prenom'];
-        $mail=$_POST['mail'];
         $tel=$_POST['tel'];
+        $mail=$_POST['mail'];
         $portable=$_POST['telP'];
         $etudes=$_POST['etudes'];
         $formation=$_POST['formation'];
@@ -53,12 +53,12 @@ class C_AdminPersonnes extends C_ControleurGenerique {
         
         $newRole=New M_Role($role, null, null);
         $newSpec=New M_Specialite($option, null, null);
-        $pers = new M_Personne(null, $newSpec, $newRole,$civilite,$nom,$prenom,$mail,$tel,$telP,$etudes,$formation,$login,$mdp);
+        $pers = new M_Personne(null, $newSpec, $newRole,$civilite,$nom,$prenom,$tel,$mail,$portable,$etudes,$formation,$login,$mdp);
         $daoPers->getPdo();
         
          if ($daoPers->insert($pers)== true)
          {
-             header('Location: http://localhost/sites/PPE3/Gestage2014-master/public/');
+             header('Location: .');
          }
          
     }

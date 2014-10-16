@@ -50,9 +50,21 @@ function valider()
         document.getElementById('nom').focus();
         return false;
     }
+    if (!isNaN(document.getElementById('nom').value)){
+        alert("Votre nom contient des chiffres. Veuillez corriger.");
+        ok = 0;
+        document.getElementById('nom').focus();
+        return false;
+    }
     if (document.getElementById('prenom').value == "")
     {
         alert("Veuillez indiquer votre prenom.");
+        ok = 0;
+        document.getElementById('prenom').focus();
+        return false;
+    }
+    if (!isNaN(document.getElementById('prenom').value)){
+        alert("Votre prénom contient des chiffres. Veuillez corriger.");
         ok = 0;
         document.getElementById('prenom').focus();
         return false;
@@ -103,7 +115,7 @@ function valider()
 
     if ((document.getElementById('mail').value.indexOf("@", 0) < 0) || (document.getElementById('mail').value.indexOf(".", 0) < 0))
     {
-        alert("Adresse email incorrecte. \nVeuillez corriger;");
+        alert("Adresse email incorrecte, l’adresse mail doit contenir les caractères « @ » et «.». \nVeuillez corriger;");
         ok = 0;
         document.getElementById('mail').focus();
         return false;
