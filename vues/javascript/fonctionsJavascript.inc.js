@@ -50,23 +50,10 @@ function valider()
         document.getElementById('nom').focus();
         return false;
     }
-
-
-    if (!isNaN(document.getElementById('nom').value)){
-        alert("Votre nom contient des chiffres. Veuillez corriger.");
-        ok = 0;
-        document.getElementById('nom').focus();
-        return false;
-    }
+    
     if (document.getElementById('prenom').value == "")
     {
         alert("Veuillez indiquer votre prenom.");
-        ok = 0;
-        document.getElementById('prenom').focus();
-        return false;
-    }
-    if (!isNaN(document.getElementById('prenom').value)){
-        alert("Votre prénom contient des chiffres. Veuillez corriger.");
         ok = 0;
         document.getElementById('prenom').focus();
         return false;
@@ -93,18 +80,18 @@ function valider()
         return false;
     }
 
-    if (isNaN(document.getElementById('telP').value))
+    if (isNaN(document.getElementById('tel').value))
     {
         alert("Votre téléphone portable ne comporte pas uniquement des chiffres. \nVeuillez corriger.");
         ok = 0;
-        document.getElementById('telP').focus();
+        document.getElementById('tel').focus();
         return false;
     }
     if ((document.getElementById('telP').value.length > 10) || (document.getElementById('tel').value.length < 10))
     {
         alert("Votre téléphone portable ne comporte pas 10 chiffres.");
         ok = 0;
-        document.getElementById('telP').focus();
+        document.getElementById('tel').focus();
         return false;
     }
     if (document.getElementById('mail').value == "")
@@ -117,7 +104,7 @@ function valider()
 
     if ((document.getElementById('mail').value.indexOf("@", 0) < 0) || (document.getElementById('mail').value.indexOf(".", 0) < 0))
     {
-        alert("Adresse email incorrecte, l’adresse mail doit contenir les caractères « @ » et «.». \nVeuillez corriger;");
+        alert("Adresse email incorrecte. \nVeuillez corriger;");
         ok = 0;
         document.getElementById('mail').focus();
         return false;
@@ -168,7 +155,6 @@ function valider()
     if (ok == 1) {
         alert("Personne créée !");
         document.submit();
-        return true;
 
     }
 

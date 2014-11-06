@@ -44,10 +44,10 @@
         <input type="text" name="nom" id="nom"></input><br/>
         <label for="prenom">Pr&eacute;nom :</label>
         <input type="prenom" name="prenom" id="prenom"></input><br/>
-        <label for="tel">Tel :</label>
-        <input type="text" name="tel" id="tel"></input><br/>
         <label for="mail">E-Mail :</label>
         <input type="text" name="mail" id="mail"></input><br/>
+        <label for="tel">Tel :</label>
+        <input type="text" name="tel" id="tel"></input><br/>
         <label for="tel">Tel portable:</label>
         <input type="text" name="telP" id="telP"></input><br/>
     </fieldset>
@@ -116,6 +116,3 @@ if (isset($this->message)) {
     echo "<strong>" . $this->message . "</strong>";
 }
 ?>
-
-
-

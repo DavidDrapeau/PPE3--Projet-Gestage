@@ -34,19 +34,18 @@ class C_AdminPersonnes extends C_ControleurGenerique {
     
     //validation de création d'utilisateur 
 
-    
-    function validationcreerPersonne(){ 
 
+    function validationcreerPersonne(){
             $daoPers = new M_DaoPersonne();
             $daoPers->connecter();
- 
+                
         $option=$_POST['option'];
         $role=$_POST['role'];
         $civilite=$_POST['civilite'];
         $nom=$_POST['nom'];
         $prenom=$_POST['prenom'];
-        $tel=$_POST['tel'];
         $mail=$_POST['mail'];
+        $tel=$_POST['tel'];
         $portable=$_POST['telP'];
         $etudes=$_POST['etudes'];
         $formation=$_POST['formation'];
@@ -54,19 +53,18 @@ class C_AdminPersonnes extends C_ControleurGenerique {
         $mdp=$_POST['mdp'];
         
         $newRole=New M_Role($role, null, null);
-        $newSpec=New M_Specialite($option, null, null);
-        $pers = new M_Personne(null, $newSpec, $newRole,$civilite,$nom,$prenom,$tel,$mail,$portable,$etudes,$formation,$login,$mdp);
-        $daoPers->getPdo();
+        $pers = new M_Personne(null, $option, $newRole,$civilite,$nom,$prenom,$mail,$tel,$telP,$etudes,$formation,$login,$mdp);
+            $daoPers->getPdo();+-
+            
+            $daoPers->insert($pers);
         
          if ($daoPers->insert($pers)== true)
          {
              header('Location: .');
          }
          
-    }
 }
+   }
     
 ?>
-
-
 
