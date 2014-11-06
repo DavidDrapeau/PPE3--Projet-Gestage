@@ -51,6 +51,7 @@ function valider()
         return false;
     }
 
+
     if (!isNaN(document.getElementById('nom').value)){
         alert("Votre nom contient des chiffres. Veuillez corriger.");
         ok = 0;
