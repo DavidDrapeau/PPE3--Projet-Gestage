@@ -33,6 +33,7 @@ class C_AdminPersonnes extends C_ControleurGenerique {
     }
     
     //validation de création d'utilisateur 
+
     
     function validationcreerPersonne(){ 
 
@@ -66,4 +67,5 @@ class C_AdminPersonnes extends C_ControleurGenerique {
 }
     
 ?>
+
 
