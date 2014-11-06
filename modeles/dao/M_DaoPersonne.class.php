@@ -48,6 +48,7 @@ class M_DaoPersonne extends M_DaoGenerique {
         } else {
             $idRole = 0; // "Autre" (simple visiteur)
         }
+
         
         //récupération de l'id spécialité
          if (!is_null($objetMetier->getSpecialite())) {

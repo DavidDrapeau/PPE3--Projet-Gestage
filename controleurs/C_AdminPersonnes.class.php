@@ -33,6 +33,7 @@ class C_AdminPersonnes extends C_ControleurGenerique {
     }
     
     //validation de création d'utilisateur 
+    
     function validationcreerPersonne(){ 
 
             $daoPers = new M_DaoPersonne();
@@ -65,3 +66,4 @@ class C_AdminPersonnes extends C_ControleurGenerique {
 }
     
 ?>
+

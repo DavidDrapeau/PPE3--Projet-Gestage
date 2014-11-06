@@ -50,6 +50,7 @@ function valider()
         document.getElementById('nom').focus();
         return false;
     }
+
     if (!isNaN(document.getElementById('nom').value)){
         alert("Votre nom contient des chiffres. Veuillez corriger.");
         ok = 0;
@@ -327,3 +328,4 @@ function imprimer() {
 
 }
     
+

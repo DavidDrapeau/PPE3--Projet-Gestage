@@ -116,3 +116,4 @@ if (isset($this->message)) {
     echo "<strong>" . $this->message . "</strong>";
 }
 ?>
+
