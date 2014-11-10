@@ -34,7 +34,6 @@ class C_AdminPersonnes extends C_ControleurGenerique {
     
     //validation de création d'utilisateur 
 
-
     function validationcreerPersonne(){
             $daoPers = new M_DaoPersonne();
             $daoPers->connecter();
@@ -60,7 +59,7 @@ class C_AdminPersonnes extends C_ControleurGenerique {
         
          if ($daoPers->insert($pers)== true)
          {
-             header('Location: .');
+             header('Location: http://localhost/sites/Gestage2014/public');
          }
          
 }

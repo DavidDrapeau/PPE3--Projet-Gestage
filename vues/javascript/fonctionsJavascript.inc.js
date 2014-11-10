@@ -300,7 +300,7 @@ function validerStage()
 
 
 
-// donction d'impretion
+// fonction d'impression
 //function imprimer(){
 ///var impression=document.creatElement("a");
 /// var test_impression=document.createTextNode("Imprimer La sélection");
@@ -315,4 +315,3 @@ function imprimer() {
 
 }
     
-
