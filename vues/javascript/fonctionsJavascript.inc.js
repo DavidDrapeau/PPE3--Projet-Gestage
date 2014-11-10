@@ -43,14 +43,6 @@ function valider()
 {
     var ok = 1;
 
-    if (document.getElementById('nom').value == "")
-    {
-        alert("Veuillez indiquer votre nom.");
-        ok = 0;
-        document.getElementById('nom').focus();
-        return false;
-    }
-    
     if (document.getElementById('prenom').value == "")
     {
         alert("Veuillez indiquer votre prenom.");

@@ -48,7 +48,6 @@ class M_DaoPersonne extends M_DaoGenerique {
         } else {
             $idRole = 0; // "Autre" (simple visiteur)
         }
-
         $retour = array(
             ':idRole' => $idRole,
             ':civilite' => $objetMetier->getCivilite(),
@@ -181,8 +180,9 @@ class M_DaoPersonne extends M_DaoGenerique {
             $sql .= "CIVILITE,IDROLE,NOM,PRENOM,NUM_TEL,ADRESSE_MAIL,NUM_TEL_MOBILE,";
             $sql .= "ETUDES,FORMATION,LOGINUTILISATEUR,MDPUTILISATEUR)  ";
             $sql .= "VALUES (";
-            $sql .= ":civilite, :idRole, :nom, :prenom, :numTel, :mail, :mobile, ";
-            $sql .= ":etudes, :formation, :login, :mdp)";
+            $sql .= ":civilite, :idRole, :nom, :prenom, :numTel, :mail, :mobile, "; 
+
+ $sql .= ":etudes, :formation, :login, :mdp)";
 //            var_dump($sql);
             // préparer la requête PDO
             $queryPrepare = $this->pdo->prepare($sql);
