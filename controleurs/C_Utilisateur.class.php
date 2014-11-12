@@ -77,10 +77,10 @@ class C_Utilisateur extends C_ControleurGenerique {
         $this->vue = new V_Vue("../vues/templates/template.inc.php");
         $this->vue->ecrireDonnee('titreVue', 'Liste des stages');
         // charger les coordonnées de l'utilisateur connecté depuis la BDD       
-        $daoPers = new M_DaoPersonne();
-        $daoPers->connecter();
-        $utilisateur = $daoPers->getOneByLogin(MaSession::get('login'));
-        $daoPers->deconnecter();
+        $daoStage = new M_DaoStage();
+        $daoStage->connecter();
+        $utilisateur = $daoStage->getOneByLogin(MaSession::get('login'));
+        $daoStage->deconnecter();
         $this->vue->ecrireDonnee('utilisateur', $utilisateur);
         // transmettre le login        
         $this->vue->ecrireDonnee('loginAuthentification', MaSession::get('login'));

@@ -1,5 +1,4 @@
-
-        <?php
+<?php
         //connection à la base de donnée 
         $db=mysql_connect('localhost','root','joliverie');
         mysql_select_db('GESTAGE',$db);
@@ -29,4 +28,4 @@
         echo"</select>";
         echo"<input type='submit' action='.?controleur=utilisateur&action=ajoutStageEtapeEntreprise' value='passer à la 2eme étapes'></input>"
         
-        ?>
+?>
