@@ -73,18 +73,14 @@ class C_Utilisateur extends C_ControleurGenerique {
         $this->vue->afficher();
     }
     
-        function centreListeStage() {
+        function afficheListeStage() {
         $this->vue = new V_Vue("../vues/templates/template.inc.php");
         $this->vue->ecrireDonnee('titreVue', 'Liste des stages');
         // charger les coordonnées de l'utilisateur connecté depuis la BDD       
         $daoStage = new M_DaoStage();
         $daoStage->connecter();
-        $utilisateur = $daoStage->getOneByLogin(MaSession::get('login'));
+        $utilisateur = $daoStage->getAll();
         $daoStage->deconnecter();
-        $this->vue->ecrireDonnee('utilisateur', $utilisateur);
-        // transmettre le login        
-        $this->vue->ecrireDonnee('loginAuthentification', MaSession::get('login'));
-        // vue centrale à inclure
         $this->vue->ecrireDonnee('centre', "../vues/includes/utilisateur/centreListeStage.inc.php");
         $this->vue->afficher();
     }

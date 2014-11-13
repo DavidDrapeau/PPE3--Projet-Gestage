@@ -12,6 +12,11 @@
         $dao= new M_DaoStage();
         $dao->connecter();
         
+        //Test de sélection par Id 
+        echo "<p>Test de sélection par Id </p>";
+        $stage = $dao->getOneById(15);
+        var_dump($stage);
+        
         //Test de sélection de tous les enregistrements
         echo "<p>Test de sélection de tous les enregistrements</p>";
         $lesStages = $dao->getAll();

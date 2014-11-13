@@ -20,7 +20,42 @@ class M_DaoStage extends M_DaoGenerique{
      * @return objet :  instance de la classe métier, initialisée d'après les valeurs de l'enregistrement 
      */
     public function enregistrementVersObjet($enreg) {
-        $retour = new M_Stage($enreg["NUM_STAGE"],$enreg["ANNEESCOL"], $enreg["IDETUDIANT"], $enreg["IDPROFESSEUR"], $enreg["IDORGANISATION"], $enreg["IDMAITRESTAGE"],
+        //On instancie les objets anneeScol, organisation, et personne
+        $uneAnneeScol = null;
+        if (isset($enreg['ANNEESCOL'])) {
+            $daoAnneeScol = new M_DaoAnneeScol();
+            $daoAnneeScol->setPdo($this->pdo);
+            $uneAnneeScol = $daoAnneeScol->getOneById($enreg['ANNEESCOL']);
+        }
+        
+        $uneOrga = null;
+        if (isset($enreg['IDORGANISATION'])) {
+            $daoOrga = new M_DaoOrganisation();
+            $daoOrga->setPdo($this->pdo);
+            $uneOrga = $daoOrga->getOneById($enreg['IDORGANISATION']);
+        }
+        //Pour personne, on instancie trois objets pour correspondre aux trois "id" stockées dans la table Stage
+        $unePerso1 = null;
+        if (isset($enreg['IDPERSONNE'])) {
+            $daoPerso = new M_DaoPersonne();
+            $daoPerso->setPdo($this->pdo);
+            $unePerso1 = $daoPerso->getOneById($enreg['IDETUDIANT']);
+        }
+        $unePerso2 = null;
+        if (isset($enreg['IDPERSONNE'])) {
+            $daoPerso = new M_DaoPersonne();
+            $daoPerso->setPdo($this->pdo);
+            $unePerso2 = $daoPerso->getOneById($enreg['IDPROFESSEUR']);
+        }
+        $unePerso3 = null;
+        if (isset($enreg['IDPERSONNE'])) {
+            $daoPerso = new M_DaoPersonne();
+            $daoPerso->setPdo($this->pdo);
+            $unePerso3 = $daoPerso->getOneById($enreg['IDMAITRESTAGE']);
+        }
+        
+        //on construit l'objet Stage
+        $retour = new M_Stage($enreg["NUM_STAGE"],$uneAnneeScol, $unePerso1, $unePerso2, $uneOrga, $unePerso3,
                 $enreg["DATEDEBUT"], $enreg["DATEFIN"], $enreg["DATEVISITESTAGE"], $enreg["VILLE"], $enreg["DIVERS"], $enreg["BILANTRAVAUX"],
                 $enreg["RESSOURCESOUTILS"], $enreg["COMMENTAIRES"], $enreg["PARTICIPATIONCCF"]);
         return $retour;
@@ -35,7 +70,6 @@ class M_DaoStage extends M_DaoGenerique{
         // construire un tableau des paramètres d'insertion ou de modification
         // l'ordre des valeurs est important : il correspond à celui des paramètres de la requête SQL
         $retour = array(
-            ':numStage' => $objetMetier-> getNumStage(),
             ':anneeScol' => $objetMetier->getAnneeScolaire(),
             ':idEtudiant' => $objetMetier->getIdEtudiant(),
             ':idProfesseur'=> $objetMetier->getIdProfesseur(),
@@ -84,7 +118,37 @@ class M_DaoStage extends M_DaoGenerique{
         }
         return $retour;
     }
-
+    /**
+     *  Lire un enregistrement d'après une valeur de clef primaire
+     * @param type $id
+     * @return type
+     */
+    function getOneById($id) {
+        $retour = null;
+        try {
+            // Requête textuelle
+            $sql = "SELECT * FROM $this->nomTable S";
+            $sql .= "LEFT OUTER JOIN ORGANISATION O ON O.IDORGANISATION = S.IDORGANISATION ";
+            $sql .= "LEFT OUTER JOIN ANNEESCOL A ON A.ANNEESCOL = S.ANNEESCOL ";
+            $sql .= "LEFT OUTER JOIN PERSONNE P ON P.IDPERSONNE = S.IDETUDIANT ";
+            $sql .= "LEFT OUTER JOIN PERSONNE P ON P.IDPERSONNE = S.IDPROFESSEUR ";
+            $sql .= "LEFT OUTER JOIN PERSONNE P ON P.IDPERSONNE = S.IDMAITRESTAGE ";
+            $sql .= "WHERE $this->nomClefPrimaire = :id";
+            // préparer la requête PDO
+            $queryPrepare = $this->pdo->prepare($sql);
+            // exécuter la requête avec les valeurs des paramètres (il n'y en a qu'un ici) dans un tableau
+            if ($queryPrepare->execute(array(':id' => $id))) {
+                // si la requête réussit :
+                // extraire l'enregistrement retourné par la requête
+                $enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC);
+                // construire l'objet métier correspondant
+                $retour = $this->enregistrementVersObjet($enregistrement);
+            }
+        } catch (PDOException $e) {
+            echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
+        }
+        return $retour;
+    }
 
     public function insert($objetMetier) {
         return FALSE;
