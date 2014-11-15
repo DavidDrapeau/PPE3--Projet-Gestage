@@ -10,7 +10,7 @@ class M_Stage{
     private $numStage;
     private $anneeScolaire;
     private $idEtudiant;
-    private $idProfeseur;
+    private $idProfesseur;
     private $idOrganisation;
     private $idMaitreStage;
     private $dateDebut;
@@ -23,11 +23,11 @@ class M_Stage{
     private $commentaires; // Commentaires si nécessaires
     private $ccf;  //Note de participation aux CCF
     
-    function __construct($numStage, $anneeScolaire, $idEtudiant, $idProfeseur, $idOrganisation, $idMaitreStage, $dateDebut, $dateFin, $dateVisite, $ville, $divers, $bilanTravaux, $ressourcesOutils, $commentaires, $ccf) {
+    function __construct($numStage, $anneeScolaire, $idEtudiant, $idProfesseur, $idOrganisation, $idMaitreStage, $dateDebut, $dateFin, $dateVisite, $ville, $divers, $bilanTravaux, $ressourcesOutils, $commentaires, $ccf) {
         $this->numStage = $numStage;
         $this->anneeScolaire = $anneeScolaire;
         $this->idEtudiant = $idEtudiant;
-        $this->idProfeseur = $idProfeseur;
+        $this->idProfeseur = $idProfesseur;
         $this->idOrganisation = $idOrganisation;
         $this->idMaitreStage = $idMaitreStage;
         $this->dateDebut = $dateDebut;
@@ -54,7 +54,7 @@ class M_Stage{
         return $this->idEtudiant;
     }
 
-    public function getIdProfeseur() {
+    public function getIdProfesseur() {
         return $this->idProfeseur;
     }
 
@@ -114,7 +114,7 @@ class M_Stage{
         $this->idEtudiant = $idEtudiant;
     }
 
-    public function setIdProfeseur($idProfeseur) {
+    public function setIdProfesseur($idProfeseur) {
         $this->idProfeseur = $idProfeseur;
     }
 

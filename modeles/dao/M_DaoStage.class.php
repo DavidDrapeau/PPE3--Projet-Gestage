@@ -20,42 +20,9 @@ class M_DaoStage extends M_DaoGenerique{
      * @return objet :  instance de la classe métier, initialisée d'après les valeurs de l'enregistrement 
      */
     public function enregistrementVersObjet($enreg) {
-        //On instancie les objets anneeScol, organisation, et personne
-        $uneAnneeScol = null;
-        if (isset($enreg['ANNEESCOL'])) {
-            $daoAnneeScol = new M_DaoAnneeScol();
-            $daoAnneeScol->setPdo($this->pdo);
-            $uneAnneeScol = $daoAnneeScol->getOneById($enreg['ANNEESCOL']);
-        }
-        
-        $uneOrga = null;
-        if (isset($enreg['IDORGANISATION'])) {
-            $daoOrga = new M_DaoOrganisation();
-            $daoOrga->setPdo($this->pdo);
-            $uneOrga = $daoOrga->getOneById($enreg['IDORGANISATION']);
-        }
-        //Pour personne, on instancie trois objets pour correspondre aux trois "id" stockées dans la table Stage
-        $unePerso1 = null;
-        if (isset($enreg['IDPERSONNE'])) {
-            $daoPerso = new M_DaoPersonne();
-            $daoPerso->setPdo($this->pdo);
-            $unePerso1 = $daoPerso->getOneById($enreg['IDETUDIANT']);
-        }
-        $unePerso2 = null;
-        if (isset($enreg['IDPERSONNE'])) {
-            $daoPerso = new M_DaoPersonne();
-            $daoPerso->setPdo($this->pdo);
-            $unePerso2 = $daoPerso->getOneById($enreg['IDPROFESSEUR']);
-        }
-        $unePerso3 = null;
-        if (isset($enreg['IDPERSONNE'])) {
-            $daoPerso = new M_DaoPersonne();
-            $daoPerso->setPdo($this->pdo);
-            $unePerso3 = $daoPerso->getOneById($enreg['IDMAITRESTAGE']);
-        }
-        
+
         //on construit l'objet Stage
-        $retour = new M_Stage($enreg["NUM_STAGE"],$uneAnneeScol, $unePerso1, $unePerso2, $uneOrga, $unePerso3,
+        $retour = new M_Stage($enreg["NUM_STAGE"],$enreg["ANNEESCOL"], $enreg["IDETUDIANT"], $enreg["IDPROFESSEUR"], $enreg["IDORGANISATION"], $enreg["IDMAITRESTAGE"],
                 $enreg["DATEDEBUT"], $enreg["DATEFIN"], $enreg["DATEVISITESTAGE"], $enreg["VILLE"], $enreg["DIVERS"], $enreg["BILANTRAVAUX"],
                 $enreg["RESSOURCESOUTILS"], $enreg["COMMENTAIRES"], $enreg["PARTICIPATIONCCF"]);
         return $retour;

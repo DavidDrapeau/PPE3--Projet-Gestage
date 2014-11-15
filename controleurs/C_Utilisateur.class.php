@@ -76,7 +76,7 @@ class C_Utilisateur extends C_ControleurGenerique {
     function afficheListeStage() {
         $this->vue = new V_Vue("../vues/templates/template.inc.php");
         $this->vue->ecrireDonnee('titreVue', 'Liste des stages');
-        // charger les coordonnées de l'utilisateur connecté depuis la BDD       
+        // charger la liste des stages pour l'envoyer vers la vue concernée      
         $daoStage = new M_DaoStage();
         $daoStage->connecter();
         $lesStages = $daoStage->getAll();
