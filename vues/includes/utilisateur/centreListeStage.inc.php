@@ -4,7 +4,6 @@
 $unStage = $this->lireDonnee('stage');
 ?>
 <form method="post" action=".?controleur=Utilisateurs&action=afficheListeStage">
-    <link href="print.css" rel="stylesheet" media="all" type="text/css"/> 
 
     <h1> Affichage de la liste des stages </h1>
     <table>
@@ -52,7 +51,9 @@ $unStage = $this->lireDonnee('stage');
             }
         ?>
     </table>
-
+    <?php echo  "N° = numéro, An = année scolaire, Id E = Id étudiant, Id P= Id professeur, Id O = Id Organisation,"
+    . "Id M = Id Maître de stage, DateD = Date de début, DateF = Date de Fin, DateVi = Date de Visite,"
+            . " Ville= ville du stage, Bilan = Bilan des travaux, Res = Ressources Outils, Com= Commentaires, ccf = Participation aux CCF" ?>
 </form>
 
 

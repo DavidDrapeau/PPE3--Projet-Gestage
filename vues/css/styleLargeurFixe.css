@@ -70,11 +70,11 @@ section{
     float: right;
     margin-left: 0px;
     display: block;
-    width: 690px;
+    width: 800px;
     border-left: solid 2px #000000;
     margin-top:0px;
-    padding:20px;
-    min-height:440px;
+    padding:30px;
+    min-height:670px;
 }
 
 h1{
@@ -87,7 +87,7 @@ h1#Titreappli{
 
 nav{
     float: left;
-    width:300px;
+    width:150px;
     float:left;
     text-align: left;
     margin-top:20px;
@@ -97,13 +97,13 @@ nav{
 
 nav ul{
     list-style-type: none;
-     padding-left: 20px;
-     padding-right: 20px;
+     padding-left: 10px;
+     padding-right: 10px;
 }
 
 nav li{
     display: inline-block;
-    margin-right: 15px;
+    margin-right: 5px;
     padding-bottom: 5px;
 }
 
@@ -157,4 +157,24 @@ fieldset{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
     
 }
+table {
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+}
 
+tr{
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+}
+th{
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+}
+td{
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+}
