@@ -1,10 +1,10 @@
 <meta http-equiv="Content-Type" content="text/html" charset="utf-8" /> 
 <form method="post" action=".?controleur=Utilisateurs&action=afficheListeStage">
 
-    <h1> Affichage de la liste des stages </h1>
+    <h1> <?php echo $this->lireDonnee('titreVue');?> </h1>
     <table>
         <tr>
-            <th>Numéro du client</th> 
+            <th>Numéro du stage</th> 
             <th>Id Etudiant</th>
             <th>Id Professeur</th>
             <th>Id Organisation</th>
@@ -14,6 +14,7 @@
             
         </tr>
         <?php
+            //Parcours la liste des stages
             $listeStages = $this->lireDonnee('lesStages');
             for($i=0; $i<count($listeStages); $i++) {
               $unStage=$listeStages[$i];
@@ -25,6 +26,7 @@
             <td><?php echo $unStage->getIdOrganisation() ?></td>
             <td><?php echo $unStage->getIdMaitreStage() ?></td>
             <td><?php echo $unStage->getCcf() ?></td>
+            <!-- Envoie la valeur du numéro du stage au controleur afin d'afficher les détails concernant un stage-->
             <td><a href="?controleur=Utilisateur&action=afficherStage&idStage=<?php echo $unStage->getNumStage() ?>">Détails</a></td>
         </tr>
         <?php

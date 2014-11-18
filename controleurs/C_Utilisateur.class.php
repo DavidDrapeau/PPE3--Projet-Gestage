@@ -75,7 +75,7 @@ class C_Utilisateur extends C_ControleurGenerique {
     
     function afficheListeStage() {
         $this->vue = new V_Vue("../vues/templates/template.inc.php");
-        $this->vue->ecrireDonnee('titreVue', 'Liste des stages');
+        $this->vue->ecrireDonnee('titreVue', "Liste des stages");
         // charger la liste des stages pour l'envoyer vers la vue concernée      
         $daoStage = new M_DaoStage();
         $daoStage->connecter();
@@ -89,11 +89,11 @@ class C_Utilisateur extends C_ControleurGenerique {
     
     function afficherStage(){
         $this->vue = new V_Vue("../vues/templates/template.inc.php");
-        $this->vue->ecrireDonnee('titreVue', 'Détails du stage');
+        $this->vue->ecrireDonnee('titreVue', "Détails du stage");
         $daoStage = new M_DaoStage();
         $daoStage->connecter();
         $unStage = $daoStage->getOneById($_GET['idStage']);
-        $this->vue->ecrireDonnee('unStage', $unStage);
+        $this->vue->ecrireDonnee('unStage', $unStage);  
         $daoStage->deconnecter();
         $this->vue->ecrireDonnee('centre', "../vues/includes/utilisateur/centreDetailsStage.inc.php");
         $this->vue->ecrireDonnee('loginAuthentification', MaSession::get('login'));
