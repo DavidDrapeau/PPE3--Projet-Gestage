@@ -1,6 +1,5 @@
 <meta http-equiv="Content-Type" content="text/html" charset="utf-8" /> 
 <form method="post" action=".?controleur=Utilisateurs&action=afficheListeStage">
-
     <h1> <?php echo $this->lireDonnee('titreVue');?> </h1>
     <table>
         <tr>
