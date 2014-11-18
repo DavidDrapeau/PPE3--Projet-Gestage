@@ -86,7 +86,19 @@ class C_Utilisateur extends C_ControleurGenerique {
         $this->vue->ecrireDonnee('loginAuthentification', MaSession::get('login'));
         $this->vue->afficher();
     }
-
+    
+    function afficherStage(){
+        $this->vue = new V_Vue("../vues/templates/template.inc.php");
+        $this->vue->ecrireDonnee('titreVue', 'Détails du stage');
+        $daoStage = new M_DaoStage();
+        $daoStage->connecter();
+        $unStage = $daoStage->getOneById($_GET['idStage']);
+        $this->vue->ecrireDonnee('unStage', $unStage);
+        $daoStage->deconnecter();
+        $this->vue->ecrireDonnee('centre', "../vues/includes/utilisateur/centreDetailsStage.inc.php");
+        $this->vue->ecrireDonnee('loginAuthentification', MaSession::get('login'));
+        $this->vue->afficher();
+    }
 }
 
 ?>

@@ -38,7 +38,7 @@ class C_AdminPersonnes extends C_ControleurGenerique {
             $daoPers = new M_DaoPersonne();
             $daoPers->connecter();
                 
-        $option=$_POST['option'];
+        $specialite=$_POST['option'];
         $role=$_POST['role'];
         $civilite=$_POST['civilite'];
         $nom=$_POST['nom'];
@@ -52,7 +52,7 @@ class C_AdminPersonnes extends C_ControleurGenerique {
         $mdp=$_POST['mdp'];
         
         $newRole=New M_Role($role, null, null);
-        $pers = new M_Personne(null, $option, $newRole,$civilite,$nom,$prenom,$mail,$tel,$telP,$etudes,$formation,$login,$mdp);
+        $pers = new M_Personne(null, $specialite, $newRole,$civilite,$nom,$prenom,$mail,$tel,$telP,$etudes,$formation,$login,$mdp);
             $daoPers->getPdo();+-
             
             $daoPers->insert($pers);

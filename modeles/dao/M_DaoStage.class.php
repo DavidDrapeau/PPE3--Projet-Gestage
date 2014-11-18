@@ -94,12 +94,7 @@ class M_DaoStage extends M_DaoGenerique{
         $retour = null;
         try {
             // Requête textuelle
-            $sql = "SELECT * FROM $this->nomTable S";
-            $sql .= "LEFT OUTER JOIN ORGANISATION O ON O.IDORGANISATION = S.IDORGANISATION ";
-            $sql .= "LEFT OUTER JOIN ANNEESCOL A ON A.ANNEESCOL = S.ANNEESCOL ";
-            $sql .= "LEFT OUTER JOIN PERSONNE P ON P.IDPERSONNE = S.IDETUDIANT ";
-            $sql .= "LEFT OUTER JOIN PERSONNE P ON P.IDPERSONNE = S.IDPROFESSEUR ";
-            $sql .= "LEFT OUTER JOIN PERSONNE P ON P.IDPERSONNE = S.IDMAITRESTAGE ";
+            $sql = "SELECT * FROM $this->nomTable S ";
             $sql .= "WHERE $this->nomClefPrimaire = :id";
             // préparer la requête PDO
             $queryPrepare = $this->pdo->prepare($sql);

@@ -48,9 +48,15 @@ class M_DaoPersonne extends M_DaoGenerique {
         } else {
             $idRole = 0; // "Autre" (simple visiteur)
         }
+        if (!is_null($objetMetier->getSpecialite())) {
+            $idSpecialite = $objetMetier->getSpecialite();
+        } else {
+            $idSpecialite = 0; // "Autre" (simple visiteur)
+        }
         $retour = array(
             ':idRole' => $idRole,
             ':civilite' => $objetMetier->getCivilite(),
+            ':idSpecialite'=> $idSpecialite,
             ':nom' => $objetMetier->getNom(),
             ':prenom' => $objetMetier->getPrenom(),
             ':numTel' => $objetMetier->getNumTel(),
