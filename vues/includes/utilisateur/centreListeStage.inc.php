@@ -19,7 +19,7 @@
               $unStage=$listeStages[$i];
         ?>    
         <tr>
-            <td><?php echo $unStage->getNumStage() ?></td>
+            <td><?php echo $unStage->getNumStage() ?></td>l
             <td><?php echo $unStage->getIdEtudiant() ?></td>
             <td><?php echo $unStage->getIdProfesseur() ?></td>
             <td><?php echo $unStage->getIdOrganisation() ?></td>

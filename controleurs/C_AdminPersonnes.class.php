@@ -52,7 +52,7 @@ class C_AdminPersonnes extends C_ControleurGenerique {
         $mdp=$_POST['mdp'];
         
         $newRole=New M_Role($role, null, null);
-        $pers = new M_Personne(null, $specialite, $newRole,$civilite,$nom,$prenom,$mail,$tel,$telP,$etudes,$formation,$login,$mdp);
+        $pers = new M_Personne(null, $specialite, $newRole,$civilite,$nom,$prenom,$mail,$tel,$portable,$etudes,$formation,$login,$mdp);
             $daoPers->getPdo();+-
             
             $daoPers->insert($pers);
