@@ -53,6 +53,8 @@ class M_DaoPersonne extends M_DaoGenerique {
         } else {
             $idSpecialite = 0; // "Autre" (simple visiteur)
         }
+        
+        
         $retour = array(
             ':idRole' => $idRole,
             ':civilite' => $objetMetier->getCivilite(),
@@ -75,7 +77,6 @@ class M_DaoPersonne extends M_DaoGenerique {
      * @return tableau-associatif d'objets : un tableau d'instances de la classe métier
      */
     function getAll() {
-        echo "--- getAll redéfini ---<br/>";
         $retour = null;
         // Requête textuelle
         $sql = "SELECT * FROM $this->nomTable P ";
@@ -102,6 +103,73 @@ class M_DaoPersonne extends M_DaoGenerique {
         }
         return $retour;
     }
+    
+     /**
+     * Lire tous les enregistrements d'une table
+      * par pagination
+     * @return tableau-associatif d'objets : un tableau d'instances de la classe métier
+     */
+    function getAllPagination($perPage,$pageCourante) {
+        $retour = null;
+        $pageCourante=$pageCourante-1;
+        $nombreD= $perPage * $pageCourante;
+        $nombreA= $perPage;
+        // Requête textuelle
+        $sql = "SELECT * FROM $this->nomTable P ";
+        $sql .= "LEFT OUTER JOIN SPECIALITE S ON S.IDSPECIALITE = P.IDSPECIALITE ";
+        $sql .= "LEFT OUTER JOIN ROLE R ON R.IDROLE = P.IDROLE "
+                . "LIMIT $nombreD , $perPage";
+        try {
+            // préparer la requête PDO
+            $queryPrepare = $this->pdo->prepare($sql);
+            // exécuter la requête PDO
+            if ($queryPrepare->execute()) {
+                // si la requête réussit :
+                // initialiser le tableau d'objets à retourner
+                $retour = array();
+                // pour chaque enregistrement retourné par la requête
+                while ($enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC)) {
+                    // construir un objet métier correspondant
+                    $unObjetMetier = $this->enregistrementVersObjet($enregistrement);
+                    // ajouter l'objet au tableau
+                    $retour[] = $unObjetMetier;
+                }
+            }
+        } catch (PDOException $e) {
+            echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
+        }
+        return $retour;
+    }
+    
+    
+    /*
+     * Compter le nombre d'éléments dans la table
+     */
+    function count(){
+        $retour = null;
+        // Requête textuelle
+        $sql = "SELECT * FROM $this->nomTable P ";
+        $sql .= "LEFT OUTER JOIN SPECIALITE S ON S.IDSPECIALITE = P.IDSPECIALITE ";
+        $sql .= "LEFT OUTER JOIN ROLE R ON R.IDROLE = P.IDROLE ";
+        try {
+            // préparer la requête PDO
+            $queryPrepare = $this->pdo->prepare($sql);
+            // exécuter la requête PDO
+            if ($queryPrepare->execute()) {
+                // si la requête réussit :
+                // initialiser le tableau d'objets à retourner
+                $retour;
+                // pour chaque enregistrement retourné par la requête
+                while ($enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC)) {
+                    $retour = $retour+1;
+                }
+            }
+        } catch (PDOException $e) {
+            echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
+        }
+        return $retour;
+        
+    }
 
     // eager-fetching
     function getOneById($id) {
@@ -121,7 +189,6 @@ class M_DaoPersonne extends M_DaoGenerique {
                 $enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC);
                 // construire l'objet métier correspondant
                 $retour = $this->enregistrementVersObjet($enregistrement);
-                var_dump($retour);
             }
         } catch (PDOException $e) {
             echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
@@ -184,12 +251,11 @@ class M_DaoPersonne extends M_DaoGenerique {
         try {
             // Requête textuelle paramétrée (paramètres nommés)
             $sql = "INSERT INTO $this->nomTable (";
-            $sql .= "CIVILITE,IDROLE,NOM,PRENOM,NUM_TEL,ADRESSE_MAIL,NUM_TEL_MOBILE,";
+            $sql .= "CIVILITE,IDSPECIALITE, IDROLE,NOM,PRENOM,NUM_TEL,ADRESSE_MAIL,NUM_TEL_MOBILE,";
             $sql .= "ETUDES,FORMATION,LOGINUTILISATEUR,MDPUTILISATEUR)  ";
             $sql .= "VALUES (";
-            $sql .= ":civilite, :idRole, :nom, :prenom, :numTel, :mail, :mobile, "; 
-
- $sql .= ":etudes, :formation, :login, :mdp)";
+            $sql .= ":civilite, :idSpecialite, :idRole, :nom, :prenom, :numTel, :mail, :mobile, "; 
+            $sql .= ":etudes, :formation, :login, :mdp)";
 //            var_dump($sql);
             // préparer la requête PDO
             $queryPrepare = $this->pdo->prepare($sql);
@@ -206,11 +272,13 @@ class M_DaoPersonne extends M_DaoGenerique {
 
     function update($idMetier, $objetMetier) {
         $retour = FALSE;
+       // var_dump($objetMetier) ;
         try {
             // Requête textuelle paramétrée (paramètres nommés)
             $sql = "UPDATE $this->nomTable SET ";
             $sql .= "IDROLE = :idRole , ";
             $sql .= "CIVILITE = :civilite , ";
+            $sql .= "IDSPECIALITE = :idSpecialite, ";
             $sql .= "NOM = :nom , ";
             $sql .= "PRENOM = :prenom , ";
             $sql .= "NUM_TEL = :numTel , ";
@@ -220,22 +288,71 @@ class M_DaoPersonne extends M_DaoGenerique {
             $sql .= "FORMATION = :formation , ";
             $sql .= "LOGINUTILISATEUR = :login , ";
             $sql .= "MDPUTILISATEUR = :mdp ";
-            $sql .= "WHERE IDPERSONNE = :id";
+            $sql .= "WHERE IDPERSONNE ='".$idMetier."'";
 //            var_dump($sql);
             // préparer la requête PDO
             $queryPrepare = $this->pdo->prepare($sql);
+            //var_dump($queryPrepare) ;
             // préparer la  liste des paramètres la valeur de l'identifiant
             //  à prendre en compte est celle qui a été passée en paramètre à la méthode
             $parametres = $this->objetVersEnregistrement($objetMetier);
-            $parametres[':id'] = $idMetier;
+           // var_dump($parametres) ;
+           // $parametres[':id'] = $idMetier;
             // exécuter la requête avec les valeurs des paramètres dans un tableau
             $retour = $queryPrepare->execute($parametres);
-//            debug_query($sql, $parametres);
+           //debug_query($sql, $parametres);
+           
         } catch (PDOException $e) {
             echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
         }
         return $retour;
     }
+    
+    /**
+     * Fonction delete
+     */
+    function delete($idMetier) {
+        $retour = FALSE;
+        try {
+            // Requête textuelle paramétrée 
+            $sql = "DELETE FROM $this->nomTable WHERE $this->nomClefPrimaire = :id";
+            // préparer la  liste des paramètres (1 seul)
+            $parametres = array(':id'=>$idMetier);
+            // préparer la requête PDO
+            $queryPrepare = $this->pdo->prepare($sql);
+            // exécuter la requête avec les valeurs des paramètres (il n'y en a qu'un ici) dans un tableau
+            $retour = $queryPrepare->execute($parametres);
+        } catch (PDOException $e) {
+            echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
+        }
+        return $retour;
+    }   
+    
+    
+     /**
+     * 
+     * @param type $row = champ à vérifier
+     * @param type $objet = données récupérés à valider pour savoir si doublon
+     * @return int 
+     */
+    function verif($row, $objet) {
+        $retour = null;
+        $ok = 1;
+        try {
+            $sql = 'SELECT ' . $row . ' FROM ' . $this->nomTable . ' WHERE ' . $row . '="' . $objet . '"';
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            $retour = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!empty($retour)) {
+                $ok = 0;
+            }
+        } catch (PDOException $e) {
+            echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
+        }
+        return $ok;
+    }
+    
+    
 
 }
 

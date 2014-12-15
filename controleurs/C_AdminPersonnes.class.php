@@ -34,35 +34,59 @@ class C_AdminPersonnes extends C_ControleurGenerique {
     
     //validation de création d'utilisateur 
 
+    	
     	function validationcreerPersonne(){
+        //Récupération données
+        $specialite = $_POST["option"];
+        $role = $_POST["role"];
+        $civilite = $_POST["civilite"];
+        $nom = $_POST["nom"];
+        $prenom = $_POST["prenom"];
+        $mail = $_POST["mail"];
+        $numTel = $_POST["tel"];
+        $mobile = $_POST["telP"];
+        $etudes = $_POST["etudes"];
+        $formation = $_POST["formation"];
+       $login = $_POST["login"];
+        $mdp = sha1($_POST["mdp"]);
+        
+        //On vérifie les données
+        if (!empty($nom) && !empty($prenom) && !empty($mail) && !empty($login) && !empty($mdp) && preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $mail) && preg_match('`^0[1-9]([-. ]?[0-9]{2}){4}$`', $numTel)) {
+            //Création des objets
             $daoPers = new M_DaoPersonne();
             $daoPers->connecter();
-                
-        $specialite=$_POST['option'];
-        $role=$_POST['role'];
-        $civilite=$_POST['civilite'];
-        $nom=$_POST['nom'];
-        $prenom=$_POST['prenom'];
-        $mail=$_POST['mail'];
-        $tel=$_POST['tel'];
-        $portable=$_POST['telP'];
-        $etudes=$_POST['etudes'];
-        $formation=$_POST['formation'];
-        $login=$_POST['login'];
-        $mdp=$_POST['mdp'];
-        
-        $newRole=New M_Role($role, null, null);
-        $pers = new M_Personne(null, $specialite, $newRole,$civilite,$nom,$prenom,$mail,$tel,$portable,$etudes,$formation,$login,$mdp);
-            $daoPers->getPdo();+-
             
-            $daoPers->insert($pers);
-        
-         if ($daoPers->insert($pers)== true)
-         {
-             header('Location: .');
-         }
+            //Vérification données en bdd
+            $verif = $daoPers->verif('adresse_mail', $mail);
+            if ($verif == 0) {
+                $message = "Erreur : l'adrese email existe déjà, recommencez !";
+            }
+            $verif = $daoPers->verif('loginutilisateur', $login);
+            if ($verif == 0) {
+                $message .= "Erreur : le login existe déjà, recommencez !";
+            }
+            $daoPers->getPdo();
+           
+            //Création des objets
+            $objetRole = new M_Role($role, null, null);
+            $pers = new M_Personne(null, $specialite, $objetRole, $civilite, $nom, $prenom, $numTel, $mail, $mobile, $etudes, $formation, $login, $mdp);
+            //Connexion et insert bdd
+            $daoPers->connecter();
+            $pdo = $daoPers->getPdo();
+            
+            if ($verif != 0) {
+                if ($daoPers->insert($pers) == true) {
+                    header('Location: .');
+                }
+            } else {
+            if(is_null($message)){
+                $message = 'Erreur de création, veuillez saisir correctement les données';
+            }
+            $this::creerPersonne($message);
+            }
+        }
          
-}
+        }
    }
 ?>
 
