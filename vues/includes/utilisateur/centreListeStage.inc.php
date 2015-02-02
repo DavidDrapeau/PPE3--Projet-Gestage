@@ -1,13 +1,9 @@
 <meta http-equiv="Content-Type" content="text/html" charset="utf-8" /> 
-<form method="post" action=".?controleur=Utilisateurs&action=afficheListeStage">
     <h1> <?php echo $this->lireDonnee('titreVue');?> </h1>
     <table>
         <tr>
             <th>Numéro du stage</th> 
             <th>Id Etudiant</th>
-            <th>Id Professeur</th>
-            <th>Id Organisation</th>
-            <th>Id Maître du stage</th>
             <th>Participation aux CCF</th>
             <th> Action </th>
             
@@ -19,14 +15,12 @@
               $unStage=$listeStages[$i];
         ?>    
         <tr>
-            <td><?php echo $unStage->getNumStage() ?></td>l
+            <td><?php echo $unStage->getNumStage() ?></td>
             <td><?php echo $unStage->getIdEtudiant() ?></td>
-            <td><?php echo $unStage->getIdProfesseur() ?></td>
-            <td><?php echo $unStage->getIdOrganisation() ?></td>
-            <td><?php echo $unStage->getIdMaitreStage() ?></td>
             <td><?php echo $unStage->getCcf() ?></td>
-            <!-- Envoie la valeur du numéro du stage au controleur afin d'afficher les détails concernant un stage-->
-            <td><a href="?controleur=Utilisateur&action=afficherStage&idStage=<?php echo $unStage->getNumStage() ?>">Détails</a></td>
+            <!-- Afficher les détails concernant un stage-->
+            <td><a href="?controleur=Utilisateur&action=afficherStage&idStage=<?php echo $unStage->getNumStage() ?>&idEtudiant=<?php echo $unStage->getIdEtudiant() ?>
+                   &idProfesseur=<?php echo $unStage->getIdProfesseur() ?>&idOrganisation=<?php echo $unStage->getIdOrganisation() ?>&idMaitreStage=<?php echo $unStage->getIdMaitreStage() ?>">Détails</a></td>
         </tr>
         <?php
             }

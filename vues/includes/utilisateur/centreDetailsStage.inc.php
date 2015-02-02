@@ -1,6 +1,10 @@
 <?php 
 // on récupère un objet métier de type Personne
 $unStage = $this->lireDonnee('unStage');
+$unEtudiant = $this->lireDonnee('unEtudiant');
+$unProfesseur = $this->lireDonnee('unProfesseur');
+$uneOrganisation = $this->lireDonnee('uneOrganisation');
+$unMaitreStage = $this->lireDonnee('unMaitreStage');
 ?>
 
     <h1><?php echo $this->lireDonnee('titreVue');?></h1>
@@ -10,14 +14,14 @@ $unStage = $this->lireDonnee('unStage');
         <input type="text" readonly="readonly" name="numStage" id="numeroStage" value="<?php echo $unStage->getNumStage(); ?>"></input><br/>
             <label for="AnneeScol">Année Scolaire:</label>
         <input type="text" readonly="readonly" name="anneeScol" id="anneeScolaire" value="<?php echo $unStage->getAnneeScolaire(); ?>"></input><br/>
-            <label for="idEtud">Id de l'étudiant:</label>
-        <input type="text" readonly="readonly" name="idEtud" id="idEtudiant" value="<?php echo $unStage->getIdEtudiant(); ?>"></input><br/>
-            <label for="idProf">Id du Professeur:</label>
-        <input type="text" readonly="readonly" name="idProf" id="idProfesseur" value="<?php echo $unStage->getIdProfesseur(); ?>"></input><br/>
-            <label for="idOrga">Id de l'organisation:</label>
-        <input type="text" readonly="readonly" name="idOrga" id="idOrganisation" value="<?php echo $unStage->getIdOrganisation(); ?>"></input><br/>
-            <label for="idMS">Id Maitre Stage:</label>
-        <input type="text" readonly="readonly" name="idMS" id="idMaitreStage" value="<?php echo $unStage->getIdMaitreStage(); ?>"></input><br/>
+            <label for="nomEtud">Nom/Prénom de l'étudiant:</label>
+        <input type="text" readonly="readonly" name="nomEtud" id="nomEtudiant" value="<?php echo $unEtudiant->getNom(); ?> <?php echo $unEtudiant->getPrenom(); ?>"></input><br/>
+            <label for="idProf">Nom/Prénom du Professeur:</label>
+        <input type="text" readonly="readonly" name="nomProf" id="nomProfesseur" value="<?php echo $unProfesseur->getNom(); ?> <?php echo $unProfesseur->getPrenom(); ?>"></input><br/>
+            <label for="idOrga">Nom/Prénom de l'organisation:</label>
+        <input type="text" readonly="readonly" name="nomOrga" id="nomOrganisation" value="<?php echo $uneOrganisation->getNom(); ?> <?php echo $uneOrganisation->getPrenom(); ?>"></input><br/>
+            <label for="idMS">Nom/Prénom Maitre Stage:</label>
+        <input type="text" readonly="readonly" name="nomMS" id="nomMaitreStage" value="<?php echo $unMaitreStage->getNom(); ?> <?php echo $unMaitreStage->getPrenom(); ?>"></input><br/>
             <label for="dateDeb">Date début stage:</label>
         <input type="text" readonly="readonly" name="dateDeb" id="dateDebut" value="<?php echo $unStage->getDateDebut(); ?>"></input><br/>
             <label for="dateF">Date de fin stage:</label>

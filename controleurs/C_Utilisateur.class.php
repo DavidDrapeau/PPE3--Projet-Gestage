@@ -91,10 +91,22 @@ class C_Utilisateur extends C_ControleurGenerique {
         $this->vue = new V_Vue("../vues/templates/template.inc.php");
         $this->vue->ecrireDonnee('titreVue', 'Détails du stage');
         $daoStage = new M_DaoStage();
+        $daoPersonne = new M_DaoPersonne();
         $daoStage->connecter();
-        $unStage = $daoStage->getOneById($_GET['idStage']);
-        $this->vue->ecrireDonnee('unStage', $unStage);       
+        $daoPersonne->connecter();
+            $unStage = $daoStage->getOneById($_GET['idStage']);
+            $this->vue->ecrireDonnee('unStage', $unStage); 
+            $unEtudiant = $daoPersonne->getOneById($_GET['idEtudiant']);
+            $this->vue->ecrireDonnee('unEtudiant', $unEtudiant);
+            $unProfesseur = $daoPersonne->getOneById($_GET['idProfesseur']);
+            $this->vue->ecrireDonnee('unProfesseur', $unProfesseur);
+            $uneOrganisation = $daoPersonne->getOneById($_GET['idOrganisation']);
+            $this->vue->ecrireDonnee('uneOrganisation', $uneOrganisation);
+            $unMaitreStage = $daoPersonne->getOneById($_GET['idMaitreStage']);
+            $this->vue->ecrireDonnee('unMaitreStage', $unMaitreStage);
+        $daoPersonne->deconnecter();
         $daoStage->deconnecter();
+        
         $this->vue->ecrireDonnee('centre', "../vues/includes/utilisateur/centreDetailsStage.inc.php");
         $this->vue->ecrireDonnee('loginAuthentification', MaSession::get('login'));
         $this->vue->afficher();
