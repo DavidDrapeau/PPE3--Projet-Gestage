@@ -19,7 +19,7 @@
             //ajout menu de gauche pour l'administrateur
             echo "<hr>";
             echo "<li><a href=\".?controleur=AdminPersonnes&action=creerPersonne\">-Cr&eacute;er une personne</a></li>";
-            echo "<li><a href=\".?controleur=administrateur&action=afficherEleve\">-Afficher tous les &eacute;l&egrave;ves</a></li>";
+            echo "<li><a href=\".?controleur=AdminPersonnes&action=afficherEleves\">-Afficher tous les &eacute;l&egrave;ves</a></li>";
 //    echo "<li><a href=\".?controleur=administrateur&action=creerClasse\">-Cr&eacute;er une classe</a></li>";
             echo "<li><a href=\".?controleur=administrateur&action=creerUtilisateur&role=MaitreStage\">-Ajouter un ma&icirc;tre de stage</a></li>";
         }

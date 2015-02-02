@@ -87,6 +87,20 @@ class C_AdminPersonnes extends C_ControleurGenerique {
         }
          
         }
+        
+        function afficherEleves(){
+            $this->vue = new V_Vue("../vues/templates/template.inc.php");
+            $this->vue->ecrireDonnee('titreVue', 'Liste des élèves');
+            // charger la liste des stages pour l'envoyer vers la vue concernée      
+            $daoPersonne = new M_DaoPersonne();
+            $daoPersonne->connecter();
+            $lesEleves = $daoPersonne->getAllByRole(4);
+            $this->vue->ecrireDonnee('lesEleves', $lesEleves);
+            $daoPersonne->deconnecter();
+            $this->vue->ecrireDonnee('centre', "../vues/includes/adminPersonnes/centreListeEleves.inc.php");
+            $this->vue->ecrireDonnee('loginAuthentification', MaSession::get('login'));
+            $this->vue->afficher();
+        }
    }
 ?>
 
