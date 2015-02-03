@@ -11,7 +11,7 @@
             
         </tr>
         <?php
-            //Parcours la liste des stages
+            //Parcours la liste des élèves
             $listeEleves = $this->lireDonnee('lesEleves');
             for($i=0; $i<count($listeEleves); $i++) {
               $unEleve=$listeEleves[$i];
@@ -26,7 +26,7 @@
             <td><?php echo $unEleve->getCivilite() ?></td>
             <td><?php echo $unEleve->getNom() ?></td>
             <td><?php echo $unEleve->getPrenom() ?></td>
-            <!-- Afficher les détails concernant un stage-->
+            <!-- Afficher les détails concernant un élève-->
             <td><a href="?controleur=AdminPersonnes&action=afficherUnEleve&idEleve=<?php echo $unEleve->getId() ?>">Détails</a></td>
         </tr>
         <?php

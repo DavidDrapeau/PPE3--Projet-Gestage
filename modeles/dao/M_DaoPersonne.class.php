@@ -171,7 +171,11 @@ class M_DaoPersonne extends M_DaoGenerique {
         
     }
 
-    // eager-fetching
+    /**
+     * Récupérer les informations d'une personne par son id
+     * @param type $id
+     * @return type
+     */
     function getOneById($id) {
         $retour = null;
         try {
@@ -196,7 +200,11 @@ class M_DaoPersonne extends M_DaoGenerique {
         return $retour;
     }
 
-    // eager-fetching
+    /**
+     * Récupérer les informations d'une personne par son login
+     * @param type $valeurLogin
+     * @return type
+     */
     function getOneByLogin($valeurLogin) {
         $retour = null;
         try {
@@ -222,7 +230,7 @@ class M_DaoPersonne extends M_DaoGenerique {
     }
     
     /**
-     * 
+     * Récupérer une liste d'élèves
      * @return type
      */
     function getAllEleves() {
@@ -255,7 +263,7 @@ class M_DaoPersonne extends M_DaoGenerique {
     }
     
     /**
-     * 
+     * Récupérer une liste d'élèves affichée avec pagination
      * @param type $perPage
      * @param type $pageCourante
      * @return type

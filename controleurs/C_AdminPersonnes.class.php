@@ -88,6 +88,7 @@ class C_AdminPersonnes extends C_ControleurGenerique {
          
         }
         
+        //Affichage de la liste des élèves
         function afficherEleves(){
             $this->vue = new V_Vue("../vues/templates/template.inc.php");
             $this->vue->ecrireDonnee('titreVue', 'Liste des élèves');
@@ -112,6 +113,7 @@ class C_AdminPersonnes extends C_ControleurGenerique {
             $this->vue->afficher();
         }
         
+        //Afficher les détails concernant un élève
         function afficherUnEleve(){
             $this->vue = new V_Vue("../vues/templates/template.inc.php");
             $this->vue->ecrireDonnee('titreVue', 'Détails concernant cet élève');
