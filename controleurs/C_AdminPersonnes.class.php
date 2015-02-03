@@ -127,6 +127,17 @@ class C_AdminPersonnes extends C_ControleurGenerique {
             $this->vue->ecrireDonnee('loginAuthentification', MaSession::get('login'));
             $this->vue->afficher();
         }
+        
+        //Supprimer un élève
+        function supprimerEleve(){
+            $this->vue = new V_Vue("../vues/templates/template.inc.php");
+            $daoPersonne = new M_DaoPersonne();
+            $daoPersonne->connecter();
+            $daoPersonne->delete($_GET['idEleve']);
+            $daoPersonne->deconnecter();
+            
+            header('Location: ?controleur=AdminPersonnes&action=afficherEleves');
+        }
    }
 ?>
 

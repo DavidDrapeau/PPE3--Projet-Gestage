@@ -7,7 +7,7 @@
             <th>Civilité</th>
             <th>Nom</th>
             <th>Prénom</th>
-            <th> Action </th>
+            <th> Actions </th>
             
         </tr>
         <?php
@@ -27,7 +27,8 @@
             <td><?php echo $unEleve->getNom() ?></td>
             <td><?php echo $unEleve->getPrenom() ?></td>
             <!-- Afficher les détails concernant un élève-->
-            <td><a href="?controleur=AdminPersonnes&action=afficherUnEleve&idEleve=<?php echo $unEleve->getId() ?>">Détails</a></td>
+            <td><a href="?controleur=AdminPersonnes&action=afficherUnEleve&idEleve=<?php echo $unEleve->getId() ?>">Détails</a>
+                <a href="?controleur=AdminPersonnes&action=supprimerEleve&idEleve=<?php echo $unEleve->getId() ?>">Supprimer</a></td>
         </tr>
         <?php
            }
