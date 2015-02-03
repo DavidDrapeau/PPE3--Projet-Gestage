@@ -94,6 +94,7 @@ class C_Utilisateur extends C_ControleurGenerique {
         $daoPersonne = new M_DaoPersonne();
         $daoStage->connecter();
         $daoPersonne->connecter();
+        //Récupération des id
             $unStage = $daoStage->getOneById($_GET['idStage']);
             $this->vue->ecrireDonnee('unStage', $unStage); 
             $unEtudiant = $daoPersonne->getOneById($_GET['idEtudiant']);

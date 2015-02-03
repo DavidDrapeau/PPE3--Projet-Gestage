@@ -8,12 +8,12 @@
 class M_Specialite{
     
 	private $id; // type : int
-	private $libellecCourt; // type : string
+	private $libelleCourt; // type : string
 	private $libelleLong; 
         
-        function __construct($id, $libellecCourt, $libelleLong) {
+        function __construct($id, $libelleCourt, $libelleLong) {
             $this->id = $id;
-            $this->libellecCourt = $libellecCourt;
+            $this->libelleCourt = $libelleCourt;
             $this->libelleLong = $libelleLong;
         }
 
@@ -21,8 +21,8 @@ class M_Specialite{
             return $this->id;
         }
 
-        public function getLibellecCourt() {
-            return $this->libellecCourt;
+        public function getLibelleCourt() {
+            return $this->libelleCourt;
         }
 
         public function getLibelleLong() {
@@ -33,8 +33,8 @@ class M_Specialite{
             $this->id = $id;
         }
 
-        public function setLibellecCourt($libellecCourt) {
-            $this->libellecCourt = $libellecCourt;
+        public function setLibelleCourt($libelleCourt) {
+            $this->libelleCourt = $libelleCourt;
         }
 
         public function setLibelleLong($libelleLong) {

@@ -91,13 +91,37 @@ class C_AdminPersonnes extends C_ControleurGenerique {
         function afficherEleves(){
             $this->vue = new V_Vue("../vues/templates/template.inc.php");
             $this->vue->ecrireDonnee('titreVue', 'Liste des élèves');
-            // charger la liste des stages pour l'envoyer vers la vue concernée      
+            // charger la liste des élèves pour l'envoyer vers la vue concernée      
             $daoPersonne = new M_DaoPersonne();
             $daoPersonne->connecter();
-            $lesEleves = $daoPersonne->getAllByRole(4);
+            
+            $perPage = 20;
+            $pageCourante=1;
+            if(isset($_GET['page'])){
+                $pageCourante=$_GET['page'];
+            }
+        
+            $lesEleves = $daoPersonne->getAllElevesPagination($perPage,$pageCourante);
+            $pages= ($daoPersonne->count()/$perPage);
             $this->vue->ecrireDonnee('lesEleves', $lesEleves);
+            $this->vue->ecrireDonnee('pages', $pages);
             $daoPersonne->deconnecter();
+            
             $this->vue->ecrireDonnee('centre', "../vues/includes/adminPersonnes/centreListeEleves.inc.php");
+            $this->vue->ecrireDonnee('loginAuthentification', MaSession::get('login'));
+            $this->vue->afficher();
+        }
+        
+        function afficherUnEleve(){
+            $this->vue = new V_Vue("../vues/templates/template.inc.php");
+            $this->vue->ecrireDonnee('titreVue', 'Détails concernant cet élève');
+            // charger les détails concernant un élève     
+            $daoPersonne = new M_DaoPersonne();
+            $daoPersonne->connecter();
+            $unEleve = $daoPersonne->getOneById($_GET['idEleve']);
+            $this->vue->ecrireDonnee('unEleve', $unEleve);
+            $daoPersonne->deconnecter();
+            $this->vue->ecrireDonnee('centre', "../vues/includes/adminPersonnes/centreDetailsEleve.inc.php");
             $this->vue->ecrireDonnee('loginAuthentification', MaSession::get('login'));
             $this->vue->afficher();
         }

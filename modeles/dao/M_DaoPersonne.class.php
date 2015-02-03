@@ -220,25 +220,73 @@ class M_DaoPersonne extends M_DaoGenerique {
         }
         return $retour;
     }
-
     
-    function getAllByRole($idRole) {
+    /**
+     * 
+     * @return type
+     */
+    function getAllEleves() {
         $retour = null;
+        // Requête textuelle
+        $sql = "SELECT * FROM $this->nomTable P ";
+        $sql .= "LEFT OUTER JOIN SPECIALITE S ON S.IDSPECIALITE = P.IDSPECIALITE ";
+        $sql .= "LEFT OUTER JOIN ROLE R ON R.IDROLE = P.IDROLE ";
+        $sql .= "WHERE P.IDROLE = 4 ";
         try {
-            // Requête textuelle
-            $sql = "SELECT * FROM $this->nomTable P ";
-            $sql .= "LEFT OUTER JOIN SPECIALITE S ON S.IDSPECIALITE = P.IDSPECIALITE ";
-            $sql .= "LEFT OUTER JOIN ROLE R ON R.IDROLE = P.IDROLE ";
-            $sql .= "WHERE R.IDROLE = :id";
             // préparer la requête PDO
             $queryPrepare = $this->pdo->prepare($sql);
-            // exécuter la requête avec les valeurs des paramètres (il n'y en a qu'un ici) dans un tableau
-            if ($queryPrepare->execute(array(':id' => $idRole))) {
+            // exécuter la requête PDO
+            if ($queryPrepare->execute()) {
                 // si la requête réussit :
-                // extraire l'enregistrement retourné par la requête
-                $enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC);
-                // construire l'objet métier correspondant
-                $retour = $this->enregistrementVersObjet($enregistrement);
+                // initialiser le tableau d'objets à retourner
+                $retour = array();
+                // pour chaque enregistrement retourné par la requête
+                while ($enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC)) {
+                    // construir un objet métier correspondant
+                    $unObjetMetier = $this->enregistrementVersObjet($enregistrement);
+                    // ajouter l'objet au tableau
+                    $retour[] = $unObjetMetier;
+                }
+            }
+        } catch (PDOException $e) {
+            echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
+        }
+        return $retour;
+    }
+    
+    /**
+     * 
+     * @param type $perPage
+     * @param type $pageCourante
+     * @return type
+     */
+    function getAllElevesPagination($perPage,$pageCourante) {
+        $retour = null;
+        $pageCourante=$pageCourante-1;
+        $nombreD= $perPage * $pageCourante;
+        $nombreA= $perPage;
+        // Requête textuelle
+        $sql = "SELECT * FROM $this->nomTable P ";
+        $sql .= "LEFT OUTER JOIN SPECIALITE S ON S.IDSPECIALITE = P.IDSPECIALITE ";
+        $sql .= "LEFT OUTER JOIN ROLE R ON R.IDROLE = P.IDROLE ";
+        $sql .= "WHERE P.IDROLE = 4 "
+                . "LIMIT $nombreD , $perPage";
+        
+        try {
+            // préparer la requête PDO
+            $queryPrepare = $this->pdo->prepare($sql);
+            // exécuter la requête PDO
+            if ($queryPrepare->execute()) {
+                // si la requête réussit :
+                // initialiser le tableau d'objets à retourner
+                $retour = array();
+                // pour chaque enregistrement retourné par la requête
+                while ($enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC)) {
+                    // construir un objet métier correspondant
+                    $unObjetMetier = $this->enregistrementVersObjet($enregistrement);
+                    // ajouter l'objet au tableau
+                    $retour[] = $unObjetMetier;
+                }
             }
         } catch (PDOException $e) {
             echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
