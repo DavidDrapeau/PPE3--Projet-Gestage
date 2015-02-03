@@ -119,5 +119,28 @@ class M_DaoStage extends M_DaoGenerique{
     public function update($idMetier, $objetMetier) {
         return FALSE;
     }
+    
+    /**
+     * Suppression d'un stage
+     * @param type $id
+     * @return type
+     */
+    function deleteStageEleve($id) {
+        $retour = FALSE;
+        try {
+            // Requête textuelle paramétrée 
+            $sql = "DELETE FROM $this->nomTable WHERE IDETUDIANT = :id";
+            // préparer la  liste des paramètres (1 seul)
+            $parametres = array(':id'=>$id);
+            // préparer la requête PDO
+            $queryPrepare = $this->pdo->prepare($sql);
+            // exécuter la requête avec les valeurs des paramètres (il n'y en a qu'un ici) dans un tableau
+            $retour = $queryPrepare->execute($parametres);
+        } catch (PDOException $e) {
+            echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
+        }
+        return $retour;
+    }   
+    
 
 }

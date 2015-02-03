@@ -131,9 +131,17 @@ class C_AdminPersonnes extends C_ControleurGenerique {
         //Supprimer un élève
         function supprimerEleve(){
             $this->vue = new V_Vue("../vues/templates/template.inc.php");
+            //objet personne
             $daoPersonne = new M_DaoPersonne();
+            //objet stage
+            $daoStage = new M_DaoStage();
+            $daoStage->connecter();
             $daoPersonne->connecter();
+            //Suppression du/des stage associé à l'élève
+            $daoStage->deleteStageEleve($_GET['idEleve']);
+            //Suppression de l'élève
             $daoPersonne->delete($_GET['idEleve']);
+            $daoStage->deconnecter();
             $daoPersonne->deconnecter();
             
             header('Location: ?controleur=AdminPersonnes&action=afficherEleves');
