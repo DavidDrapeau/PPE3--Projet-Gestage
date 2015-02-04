@@ -121,7 +121,7 @@ class M_DaoStage extends M_DaoGenerique{
     }
     
     /**
-     * Suppression d'un stage
+     * Suppression d'un stage suite à a suppression d'un élève
      * @param type $id
      * @return type
      */
@@ -132,6 +132,28 @@ class M_DaoStage extends M_DaoGenerique{
             $sql = "DELETE FROM $this->nomTable WHERE IDETUDIANT = :id";
             // préparer la  liste des paramètres (1 seul)
             $parametres = array(':id'=>$id);
+            // préparer la requête PDO
+            $queryPrepare = $this->pdo->prepare($sql);
+            // exécuter la requête avec les valeurs des paramètres (il n'y en a qu'un ici) dans un tableau
+            $retour = $queryPrepare->execute($parametres);
+        } catch (PDOException $e) {
+            echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
+        }
+        return $retour;
+    }   
+    
+    /**
+     * Suppression d'un stage
+     * @param type $idMetier
+     * @return type
+     */
+    function delete($idMetier) {
+        $retour = FALSE;
+        try {
+            // Requête textuelle paramétrée 
+            $sql = "DELETE FROM $this->nomTable WHERE $this->nomClefPrimaire = :id";
+            // préparer la  liste des paramètres (1 seul)
+            $parametres = array(':id'=>$idMetier);
             // préparer la requête PDO
             $queryPrepare = $this->pdo->prepare($sql);
             // exécuter la requête avec les valeurs des paramètres (il n'y en a qu'un ici) dans un tableau

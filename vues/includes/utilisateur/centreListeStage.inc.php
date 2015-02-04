@@ -20,7 +20,10 @@
             <td><?php echo $unStage->getCcf() ?></td>
             <!-- Afficher les détails concernant un stage-->
             <td><a href="?controleur=Utilisateur&action=afficherStage&idStage=<?php echo $unStage->getNumStage() ?>&idEtudiant=<?php echo $unStage->getIdEtudiant() ?>
-                   &idProfesseur=<?php echo $unStage->getIdProfesseur() ?>&idOrganisation=<?php echo $unStage->getIdOrganisation() ?>&idMaitreStage=<?php echo $unStage->getIdMaitreStage() ?>">Détails</a></td>
+                   &idProfesseur=<?php echo $unStage->getIdProfesseur() ?>&idOrganisation=<?php echo $unStage->getIdOrganisation() ?>&idMaitreStage=<?php echo $unStage->getIdMaitreStage() ?>">Détails</a>
+                <a href="?controleur=Utilisateur&action=supprimerStage&idStage=<?php echo $unStage->getNumStage() ?>">Supprimer</a>
+            </td>
+                   
         </tr>
         <?php
             }

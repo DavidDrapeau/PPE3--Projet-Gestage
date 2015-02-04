@@ -112,6 +112,19 @@ class C_Utilisateur extends C_ControleurGenerique {
         $this->vue->ecrireDonnee('loginAuthentification', MaSession::get('login'));
         $this->vue->afficher();
     }
+    
+    //Supprimer un stage
+    function supprimerStage(){
+        $this->vue = new V_Vue("../vues/templates/template.inc.php");
+        //objet stage
+        $daoStage = new M_DaoStage();
+        $daoStage->connecter();
+        //Suppression du/des stage associé à l'élève
+        $daoStage->delete($_GET['idStage']);
+        $daoStage->deconnecter();
+
+        header('Location: ?controleur=Utilisateur&action=afficheListeStage');
+    }
 }
 
 ?>
