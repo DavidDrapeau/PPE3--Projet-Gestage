@@ -90,9 +90,15 @@ class C_Utilisateur extends C_ControleurGenerique {
     function afficherStage(){
         $this->vue = new V_Vue("../vues/templates/template.inc.php");
         $this->vue->ecrireDonnee('titreVue', 'Détails du stage');
+        //objet stage
         $daoStage = new M_DaoStage();
+        //objet organisation
+        $daoOrganisation = new M_DaoOrganisation();
+        //objet personne
         $daoPersonne = new M_DaoPersonne();
+        
         $daoStage->connecter();
+        $daoOrganisation->connecter();
         $daoPersonne->connecter();
         //Récupération des id
             $unStage = $daoStage->getOneById($_GET['idStage']);
@@ -101,11 +107,12 @@ class C_Utilisateur extends C_ControleurGenerique {
             $this->vue->ecrireDonnee('unEtudiant', $unEtudiant);
             $unProfesseur = $daoPersonne->getOneById($_GET['idProfesseur']);
             $this->vue->ecrireDonnee('unProfesseur', $unProfesseur);
-            $uneOrganisation = $daoPersonne->getOneById($_GET['idOrganisation']);
+            $uneOrganisation = $daoOrganisation->getOneById($_GET['idOrganisation']);
             $this->vue->ecrireDonnee('uneOrganisation', $uneOrganisation);
             $unMaitreStage = $daoPersonne->getOneById($_GET['idMaitreStage']);
             $this->vue->ecrireDonnee('unMaitreStage', $unMaitreStage);
         $daoPersonne->deconnecter();
+        $daoOrganisation->deconnecter();
         $daoStage->deconnecter();
         
         $this->vue->ecrireDonnee('centre', "../vues/includes/utilisateur/centreDetailsStage.inc.php");

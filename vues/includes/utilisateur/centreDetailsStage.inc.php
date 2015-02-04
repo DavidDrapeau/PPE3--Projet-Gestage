@@ -16,10 +16,10 @@ $unMaitreStage = $this->lireDonnee('unMaitreStage');
         <input type="text" readonly="readonly" name="anneeScol" id="anneeScolaire" value="<?php echo $unStage->getAnneeScolaire(); ?>"></input><br/>
             <label for="nomEtud">Nom/Prénom de l'étudiant:</label>
         <input type="text" readonly="readonly" name="nomEtud" id="nomEtudiant" value="<?php echo $unEtudiant->getNom(); ?> <?php echo $unEtudiant->getPrenom(); ?>"></input><br/>
-            <label for="idProf">Nom/Prénom du Professeur:</label>
+            <label for="nomProf">Nom/Prénom du Professeur:</label>
         <input type="text" readonly="readonly" name="nomProf" id="nomProfesseur" value="<?php echo $unProfesseur->getNom(); ?> <?php echo $unProfesseur->getPrenom(); ?>"></input><br/>
-            <label for="idOrga">Nom/Prénom de l'organisation:</label>
-        <input type="text" readonly="readonly" name="nomOrga" id="nomOrganisation" value="<?php echo $uneOrganisation->getNom(); ?> <?php echo $uneOrganisation->getPrenom(); ?>"></input><br/>
+            <label for="nomOrga">Nom de l'organisation:</label>
+        <input type="text" readonly="readonly" name="nomOrga" id="nomOrganisation" value="<?php echo $uneOrganisation->getNom(); ?>"></input><br/>
             <label for="idMS">Nom/Prénom Maitre Stage:</label>
         <input type="text" readonly="readonly" name="nomMS" id="nomMaitreStage" value="<?php echo $unMaitreStage->getNom(); ?> <?php echo $unMaitreStage->getPrenom(); ?>"></input><br/>
             <label for="dateDeb">Date début stage:</label>

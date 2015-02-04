@@ -67,7 +67,7 @@ class M_DaoPersonne extends M_DaoGenerique {
             ':etudes' => $objetMetier->getEtudes(),
             ':formation' => $objetMetier->getFormation(),
             ':login' => $objetMetier->getLogin(),
-            ':mdp' => $objetMetier->getMdp(),
+            ':mdp' => $objetMetier->getMdp()
         );
         return $retour;
     }
