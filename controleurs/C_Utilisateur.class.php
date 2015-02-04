@@ -132,6 +132,37 @@ class C_Utilisateur extends C_ControleurGenerique {
 
         header('Location: ?controleur=Utilisateur&action=afficheListeStage');
     }
+    
+    //Liste des entreprises (organisations)
+    function listeEntreprises(){
+        $this->vue = new V_Vue("../vues/templates/template.inc.php");
+        $this->vue->ecrireDonnee('titreVue', 'Liste des entreprises');
+        // charger la liste des entreprises pour l'envoyer vers la vue concernée      
+        $daoEntreprise = new M_DaoOrganisation();
+        $daoEntreprise->connecter();
+        $lesEntreprises = $daoEntreprise->getAll();
+        $this->vue->ecrireDonnee('lesEntreprises', $lesEntreprises);
+        $daoEntreprise->deconnecter();
+        $this->vue->ecrireDonnee('centre', "../vues/includes/utilisateur/centreListeEntreprise.inc.php");
+        $this->vue->ecrireDonnee('loginAuthentification', MaSession::get('login'));
+        $this->vue->afficher();
+    }
+    
+    //Afficher les détails d'une entreprise
+    function afficherEntreprise(){
+        $this->vue = new V_Vue("../vues/templates/template.inc.php");
+        $this->vue->ecrireDonnee('titreVue', "Informations concernant l'entreprise");
+        
+        $daoEntreprise = new M_DaoOrganisation();
+        $daoEntreprise->connecter();
+        $uneEntreprise = $daoEntreprise->getOneById($_GET['idEntreprise']);
+        $this->vue->ecrireDonnee('uneEntreprise', $uneEntreprise);
+        $daoEntreprise->deconnecter();
+        $this->vue->ecrireDonnee('centre', "../vues/includes/utilisateur/centreDetailsEntreprise.inc.php");
+        $this->vue->ecrireDonnee('loginAuthentification', MaSession::get('login'));
+        $this->vue->afficher();
+    }
+    
 }
 
 ?>

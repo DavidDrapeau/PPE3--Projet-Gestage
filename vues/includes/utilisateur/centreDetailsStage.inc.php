@@ -10,8 +10,6 @@ $unMaitreStage = $this->lireDonnee('unMaitreStage');
     <h1><?php echo $this->lireDonnee('titreVue');?></h1>
     <fieldset>
         <legend>Détails du stage</legend>
-            <label for="numStage">Numéro du stage:</label>
-        <input type="text" readonly="readonly" name="numStage" id="numeroStage" value="<?php echo $unStage->getNumStage(); ?>"></input><br/>
             <label for="AnneeScol">Année Scolaire:</label>
         <input type="text" readonly="readonly" name="anneeScol" id="anneeScolaire" value="<?php echo $unStage->getAnneeScolaire(); ?>"></input><br/>
             <label for="nomEtud">Nom/Prénom de l'étudiant:</label>
