@@ -5,7 +5,7 @@
             <th>Numéro du stage</th> 
             <th>Id Etudiant</th>
             <th>Participation aux CCF</th>
-            <th> Action </th>
+            <th> Actions </th>
             
         </tr>
         <?php

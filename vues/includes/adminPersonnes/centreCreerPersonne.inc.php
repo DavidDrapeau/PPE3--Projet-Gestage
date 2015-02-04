@@ -56,7 +56,7 @@
 
     <div id="Formulaire_Etudiant" style="visibility:hidden" height="0">
         <fieldset>
-            <legend>Informations specifiques aux étudiant</legend>
+            <legend>Informations specifiques aux étudiants</legend>
 
 
             <label for="etudes">Etudes :</label>
