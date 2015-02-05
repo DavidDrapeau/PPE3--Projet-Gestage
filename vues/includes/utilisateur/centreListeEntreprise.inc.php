@@ -5,7 +5,7 @@
             <th>Id Entreprise</th> 
             <th>Nom</th>
             <th>Ville</th>
-            <th> Action </th>
+            <th>Actions</th>
             
         </tr>
         <?php
@@ -19,7 +19,9 @@
             <td><?php echo $uneEntreprise->getNom() ?></td>
             <td><?php echo $uneEntreprise->getVille() ?></td>
             <!-- Afficher les détails concernant un stage-->
-            <td><a href="?controleur=Utilisateur&action=afficherEntreprise&idEntreprise=<?php echo $uneEntreprise->getIdOrganisation() ?>">Détails</a></td>
+            <td><a href="?controleur=Utilisateur&action=afficherEntreprise&idEntreprise=<?php echo $uneEntreprise->getIdOrganisation() ?>">Détails</a>
+            <a href="?controleur=Utilisateur&action=supprimerEntreprise&idEntreprise=<?php echo $uneEntreprise->getIdOrganisation() ?>">Supprimer</a>
+            </td>
                    
         </tr>
         <?php

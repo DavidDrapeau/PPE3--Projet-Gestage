@@ -222,7 +222,21 @@ class C_Utilisateur extends C_ControleurGenerique {
             }
         }
          
-        }
+    }
+    
+    //Supprimer une entreprise
+    function supprimerEntreprise(){
+        $this->vue = new V_Vue("../vues/templates/template.inc.php");
+        //objet entreprise (organisation)
+        $daoEntreprise = new M_DaoOrganisation();
+        $daoEntreprise->connecter();
+        //Suppression du/des entreprise(s)
+        $daoEntreprise->delete($_GET['idEntreprise']);
+        $daoEntreprise->deconnecter();
+
+        header('Location: ?controleur=Utilisateur&action=listeEntreprises');
+    }
+    
     
 }
 
