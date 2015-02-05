@@ -172,11 +172,11 @@ function validerE()
         return false;
     }
 
-    if (document.getElementById('ads').value == "")
+    if (document.getElementById('adresse').value == "")
     {
         alert("Veuillez indiquer l'adresse l'entreprise.");
         ok = 0;
-        document.getElementById('ads').focus();
+        document.getElementById('adresse').focus();
         return false;
     }
     if (document.getElementById('cp').value == "")
@@ -195,7 +195,7 @@ function validerE()
     }
     if ((document.getElementById('cp').value.length > 5) || (document.getElementById('cp').value.length < 5))
     {
-        alert("Le code postal ne comporte pas 5 chifre.");
+        alert("Le code postal ne comporte pas 5 chiffres.");
         ok = 0;
         document.getElementById('cp').focus();
         return false;
@@ -216,16 +216,37 @@ function validerE()
     }
     if ((document.getElementById('tel').value.length > 10) || (document.getElementById('tel').value.length < 10))
     {
-        alert("Le téléphone ne comporte pas 10 chifre.");
+        alert("Le téléphone ne comporte pas 10 chiffres.");
         ok = 0;
         document.getElementById('tel').focus();
         return false;
     }
-    if (document.getElementById('fj').value == "")
+     if (document.getElementById('fax').value == "")
+    {
+        alert("Veuillez indiquer le fax de l'entreprise.");
+        ok = 0;
+        document.getElementById('fax').focus();
+        return false;
+    }
+    if (isNaN(document.getElementById('fax').value))
+    {
+        alert("Le téléphone ne comporte pas uniquement des chiffres. \nVeuillez corriger.");
+        ok = 0;
+        document.getElementById('fax').focus();
+        return false;
+    }
+    if ((document.getElementById('fax').value.length > 10) || (document.getElementById('fax').value.length < 10))
+    {
+        alert("Le téléphone ne comporte pas 10 chiffres.");
+        ok = 0;
+        document.getElementById('fax').focus();
+        return false;
+    }
+    if (document.getElementById('frmJu').value == "")
     {
         alert("Veuillez indiquer sa forme juridique.");
         ok = 0;
-        document.getElementById('fj').focus();
+        document.getElementById('frmJu').focus();
         return false;
     }
     if (ok == 1) {

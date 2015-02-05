@@ -104,9 +104,35 @@ class M_DaoOrganisation extends M_DaoGenerique{
         }
         return $retour;
     }
-
+    
+    /**
+     * Requête d'insertion d'une nouvelle organisation
+     * @param type $objetMetier
+     * @return type
+     */
     public function insert($objetMetier) {
-        return FALSE;
+        $retour = FALSE;
+        try {
+            // Requête textuelle paramétrée (paramètres nommés)
+            $sql = "INSERT INTO $this->nomTable (";
+            $sql .= "NOM_ORGANISATION, VILLE_ORGANISATION, ADRESSE_ORGANISATION, ";
+            $sql .= "CP_ORGANISATION, TEL_ORGANISATION, FAX_ORGANISATION, FORMEJURIDIQUE, ACTIVITE)";
+            $sql .= "VALUES (";
+            $sql .= ":nomOrganisation, :villeOrganisation, :adresseOrganisation, :cpOrganisation, "; 
+            $sql .= ":telOrganisation, :faxOrganisation, :formeJuridique, :activite)";
+//            var_dump($sql);
+           
+            // préparer la requête PDO
+            $queryPrepare = $this->pdo->prepare($sql);
+            // préparer la  liste des paramètres, avec l'identifiant en dernier
+            $parametres = $this->objetVersEnregistrement($objetMetier);
+            // exécuter la requête avec les valeurs des paramètres dans un tableau
+            $retour = $queryPrepare->execute($parametres);
+//            debug_query($sql, $parametres);
+        } catch (PDOException $e) {
+            echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
+        }
+        return $retour;
     }
 
     public function update($idMetier, $objetMetier) {
@@ -135,6 +161,30 @@ class M_DaoOrganisation extends M_DaoGenerique{
         }
         return $retour;
     }   
+    
+    /**
+     * 
+     * @param type $row = champ à vérifier
+     * @param type $objet = données récupérés à valider pour savoir si doublon
+     * @return int
+     */
+    function verif($row, $objet) {
+        $retour = null;
+        $ok = 1;
+        try {
+            $sql = 'SELECT ' . $row . ' FROM ' . $this->nomTable . ' WHERE ' . $row . '="' . $objet . '"';
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            $retour = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!empty($retour)) {
+                $ok = 0;
+            }
+        } catch (PDOException $e) {
+            echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
+        }
+        return $ok;
+    }
+    
     
 
 }

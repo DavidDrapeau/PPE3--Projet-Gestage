@@ -163,6 +163,67 @@ class C_Utilisateur extends C_ControleurGenerique {
         $this->vue->afficher();
     }
     
+    //Ajout d'une nouvelle entreprise
+    function creerEntreprise(){
+        $this->vue = new V_Vue("../vues/templates/template.inc.php");
+        $this->vue->ecrireDonnee('titreVue', 'Cr&eacute;ation d\'une entreprise');
+        
+        $this->vue->ecrireDonnee('loginAuthentification',MaSession::get('login'));       
+        $this->vue->ecrireDonnee('centre', "../vues/includes/utilisateur/centreCreerEntreprise.inc.php");
+               
+        $this->vue->afficher();
+    }
+    
+    //Validation de l'ajout d'une nouvelle entreprise
+    function validationCreerEntreprise(){
+        //Récupération données
+        $nom = $_POST["nom"];
+        $ville = $_POST["ville"];
+        $adresse = $_POST["adresse"];
+        $cp = $_POST["cp"];
+        $tel = $_POST["tel"];
+        $fax = $_POST["fax"];
+        $formeJ = $_POST["frmJu"];
+        $activite = $_POST["activite"];
+        
+        //On vérifie les données
+        if (!empty($nom) && !empty($ville) && !empty($adresse) && !empty($cp) && preg_match('`^0[1-9]([-. ]?[0-9]{2}){4}$`', $tel) && preg_match('`^0[1-9]([-. ]?[0-9]{2}){4}$`', $fax) && !empty($formeJ) && !empty($activite)) {
+            //Création des objets
+            $daoEntreprise = new M_DaoOrganisation();
+            $daoEntreprise->connecter();
+            
+            //Vérification données en bdd
+            $verif = $daoEntreprise->verif('tel_organisation', $tel);
+            if ($verif == 0) {
+                $message = "Erreur : le numéro de téléphone existe déjà, recommencez !";
+            }
+            $verif = $daoEntreprise->verif('fax_organisation', $fax);
+            if ($verif == 0) {
+                $message = "Erreur : le numéro du fax existe déjà, recommencez !";
+            }
+            $daoEntreprise->getPdo();
+           
+            //Création des objets
+            $entre = new M_Organisation(null, $nom, $ville, $adresse, $cp, $tel, $fax, $formeJ, $activite);
+            //Connexion et insert bdd
+            $daoEntreprise->connecter();
+            $pdo = $daoEntreprise->getPdo();
+            
+            if ($verif != 0) {
+                if ($daoEntreprise->insert($entre) == true) {
+                    header('Location: .');
+                }
+            } else {
+            if(is_null($message)){
+                $message = 'Erreur de création, veuillez saisir correctement les données';
+            }
+            $this::creerEntreprise($message);
+            
+            }
+        }
+         
+        }
+    
 }
 
 ?>
